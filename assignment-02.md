@@ -86,10 +86,11 @@ The work upper bound is O(n^(c+1))
 
   * $W(n)=W(\sqrt{n})+1$
 
-W(n) is leaf dominated. Therefore, you need to multiply the maximum cost with the number of levels.
+W(n) is balanced. Therefore, you need to multiply the maximum cost with the number of levels.
 
-maximum cost: 1
-number of nodes at i level: n^(1/(2^i))
+maximum cost: 1, number of levels: lg(lg(n))
+
+The work upper bound is O(lg(lg(n)))
 
 
 2. Suppose that for a given task you are choosing between the following three algorithms:
@@ -97,18 +98,51 @@ number of nodes at i level: n^(1/(2^i))
   * Algorithm $\mathcal{A}$ solves problems by dividing them into
       five subproblems of half the size, recursively solving each
       subproblem, and then combining the solutions in linear time.
-    
+  
+  W(n) = 5W(n/2) + n
+
+  W(n) is leaf dominated. Therefore, the runtime is the number of the leaves.
+
+  height of tree: lg(n)
+  number of nodes at i level: 5^i
+
+  5^lg(n) belongs to O(n^lg(5)), which is the upper bound for the runtime.
+     
   * Algorithm $\mathcal{B}$ solves problems of size $n$ by
       recursively solving two subproblems of size $n-1$ and then
       combining the solutions in constant time.
+  
+  W(n) = 2W(n-1) + 1
+
+  W(n) is leaf dominated. Therefore, the runtime is the number of the leaves.
+
+  height of tree: n
+  number of nodes at i level: 2^i
+
+  2^n belongs to O(2^n), which is the upper bound for the runtime.
     
   * Algorithm $\mathcal{C}$ solves problems of size $n$ by dividing
       them into nine subproblems of size $n/3$, recursively solving
       each subproblem, and then combining the solutions in $O(n^2)$
       time.
+  
+  W(n) = 9W(n/3) + n^2
+
+  W(n) is balanced, thus the runtime is the product of the maximum cost with the number of levels.
+
+  maximum cost: n^2
+  number of levels: log3(n)
+
+  Therefore, the runtime has an upper bound of O(n^2(log3(n)))
 
     What are the asymptotic running times of each of these algorithms?
+
+    [see above]
+
     Which algorithm would you choose?
+
+    We can eliminate Algorithm B because it has an exponential upper bound, which is the worst of the three. Now, we just have to compare Algorithm A and C.Algorithm C has an upper bound runtime of O(n^lg(5)), and if you graph it alongside the upper bound runtime of Algorithm A, O(n^2(lg(n))), you can see that Algorithm C is more efficient.
+
 
 
 3. Now that you have some practice solving recurrences, let's work on
