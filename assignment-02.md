@@ -1,6 +1,6 @@
 # CMPS 2200 Assignment 2
 
-**Name:**_________________________
+**Name:** Cameron McLaren
 
 In this assignment we'll work on applying the methods we've learned to analyze recurrences, and also see their behavior
 in practice. As with previous
@@ -12,54 +12,84 @@ and push to your github repository.
 
 1. Derive asymptotic upper bounds of work for each recurrence below.
   * $W(n)=2W(n/3)+1$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is leaf dominated. Therefore, you need to find the work at the end leaves.
+height of tree: log3(n)
+number of nodes at i level: 2^i
+
+Hence, the number of nodes at level log3(n) is 2^log3(n)
+
+The work upper bound is O(n^log3(2))
+
+  
   * $W(n)=5W(n/4)+n$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is leaf dominated. Therefore, you need to find the work at the end leaves.
+
+height of tree: log4(n)
+number of nodes at i level: 5^i
+
+5^log4(n) belongs to O(n^log4(5)), which is the upper bound for the work.
+
+
   * $W(n)=7W(n/7)+n$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is balanced. Therefore, you need to multiply the maximum cost with the number of levels.
+
+maximum cost: n, number of levels: log7(n)
+
+The work upper bound is O(nlog7(n))
+
+
   * $W(n)=9W(n/3)+n^2$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is balanced. Therefore, you need to multiply the maximum cost with the number of levels.
+
+maximum cost: n^2, number of levels: log3(n)
+
+The work upper bound is O((n^2)log3n)
+
+
   * $W(n)=8W(n/2)+n^3$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is balanced. Therefore, you need to multiply the maximum cost with the number of levels.
+
+maximum cost: n^3, number of levels: lg(n)
+
+The work upper bound is O(n^3 * lg(n))
+
+
   * $W(n)=49W(n/25)+n^{3/2}\log n$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is root dominated. Therefore, the work of the function is the work of the root.
+
+The work of the root is n^(3/2)(log(n)), therefore the work upper bound of the function is O(n^(3/2)(log(n))).
+
+
   * $W(n)=W(n-1)+2$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is leaf dominated, which means that the work is the same as the work at the end leaves.
+
+height of tree: 2^i
+number of nodes at i level: 2^lg(n) = n
+
+Hence, the work upper bound of the function is O(n)
+
   * $W(n)= W(n-1)+n^c$, with $c\geq 1$
-.  
-.  
-.  
-.  
-.  
+
+W(n) is balanced. Therefore, you need to multiply the maximum cost with the number of levels.
+
+maximum cost: n^c, number of levels: n
+
+The work upper bound is O(n^(c+1))
+
+
   * $W(n)=W(\sqrt{n})+1$
+
+W(n) is leaf dominated. Therefore, you need to multiply the maximum cost with the number of levels.
+
+maximum cost: 1
+number of nodes at i level: n^(1/(2^i))
 
 
 2. Suppose that for a given task you are choosing between the following three algorithms:

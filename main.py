@@ -47,6 +47,35 @@ def pad(x,y):
 
 def subquadratic_multiply(x, y):
     ### TODO
+    xvec = x.binary_vec
+    yvec = y.binary_vec
+
+    # compares length of x and y in order to determine whether or not to pad zeros
+    xvec, yvec = pad(xvec, yvec)
+    
+    # compares length of x and y again in order to determine value of n (to be used later in generating the exponents)
+    if len(xvec) > len(yvec):
+        n = len(xvec)
+    elif len(yvec) > len(xvec):
+        n = len(yvec)
+    
+    # checks whether or not to use simple multiplication or if calling _quadratic_multiply is needed
+    if x <=1 and y <= 1:
+        return x * y
+    else:
+        x_left, x_right = split_number(xvec)
+        y_left, y_right = split_number(yvec)
+        
+        product1 = subquadratic_multiply(x_left, y_left)
+        product2 = subquadratic_multiply(x_right, y_right)
+        product3 = subquadratic_multiply(x_left, y_right)
+        product4 = subquadratic_multiply(x_right, y_left)
+
+        exponent2 = bit_shift(BinaryNumber(2), n).decimal_val
+        exponent2n = bit_shift(BinaryNumber(2), n/2).decimal_val
+
+    # returns final result (combines parallel results)
+        return (exponent2 * product1) + (exponent2n * (product2 + product3)) + product4
     pass
     ###
 
