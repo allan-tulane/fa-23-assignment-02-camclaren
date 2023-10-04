@@ -60,8 +60,8 @@ def subquadratic_multiply(x, y):
         n = len(yvec)
     
     # checks whether or not to use simple multiplication or if calling _quadratic_multiply is needed
-    if x <=1 and y <= 1:
-        return x * y
+    if x.decimal_val <=1 and y.decimal_val <= 1:
+        return BinaryNumber(x) * BinaryNumber(y)
     else:
         x_left, x_right = split_number(xvec)
         y_left, y_right = split_number(yvec)
@@ -71,8 +71,8 @@ def subquadratic_multiply(x, y):
         product3 = subquadratic_multiply(x_left, y_right)
         product4 = subquadratic_multiply(x_right, y_left)
 
-        exponent2 = bit_shift(BinaryNumber(2), n).decimal_val
-        exponent2n = bit_shift(BinaryNumber(2), n/2).decimal_val
+        exponent2 = bit_shift(BinaryNumber(product2), n).decimal_val
+        exponent2n = bit_shift(BinaryNumber(product4), n/2).decimal_val
 
     # returns final result (combines parallel results)
         return (exponent2 * product1) + (exponent2n * (product2 + product3)) + product4
